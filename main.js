@@ -143,18 +143,18 @@ function winOfLose(wins) {
     if (winCoin > 0)
         alert("Bạn thắng " + winCoin + " đồng");
 
-    if (user.coin <= 0) {
     setTimeout(() => {
+    if (user.coin <= 0)
         alert("Bạn đã thua cuộc!");
-    }, 100);
-    }
+    }, 50);
 }
 
-function resetGame() {
+window.resetGame = function () {
     user.coin = 10;
 
     for (var i = 0; i < figures.length; i++) {
         figures[i].coin = 0;
     }
-    updateData() ;
-}
+
+    updateData();
+};
