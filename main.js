@@ -142,4 +142,19 @@ function winOfLose(wins) {
 
     if (winCoin > 0)
         alert("Bạn thắng " + winCoin + " đồng");
+
+    if (user.coin <= 0) {
+    setTimeout(() => {
+        alert("Bạn đã thua cuộc!");
+    }, 100);
+    }
+}
+
+function resetGame() {
+    user.coin = 10;
+
+    for (var i = 0; i < figures.length; i++) {
+        figures[i].coin = 0;
+    }
+    updateData() ;
 }
