@@ -1,4 +1,3 @@
-document.querySelector(".btn__start")
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const btnStart = document.querySelector(".btn__start");
@@ -51,7 +50,7 @@ var user = {
 function updateData() {
     var headerAvatar = document.querySelector('.header__avatar img');
     var headerBet = $('.header__bet');
-    var headerMoney = $('.header__money');
+    var headerMoney = document.querySelector('.money-text');
     headerAvatar.src = user.avatar;
     headerBet.innerHTML = 'Bàn cược: ' + user.betTable + ' đ';
     headerMoney.innerHTML = 'Tiền: ' + user.coin + ' đ';
@@ -75,7 +74,7 @@ var randomFigure = () => {
             break;
         }
     }
-    return element;
+    return element || figures[0];
 }
 // Xử lý lắc xúc sắc
 if (btnStart) {
@@ -93,7 +92,7 @@ if (btnStart) {
         var t = 0;
         var timer = setInterval(() => {
             t += 100;
-            if (t >= 500) {
+            if (t >= 1500) {
                 clearInterval(timer);
                 winOfLose(wins);
             } else {
@@ -106,10 +105,9 @@ if (btnStart) {
     };
 }
 // Đặt tiền
-dicesItem.forEach((e) => {
-    e.onclick = (e) => {
+dicesItem.forEach((item) => {
+    item.onclick = () => {
         if (user.coin >= user.betTable) {
-            var item = e.target.parentElement.parentElement;
             user.coin -= user.betTable;
             figures[item.dataset.id].coin += user.betTable;
             updateData();
@@ -119,18 +117,20 @@ dicesItem.forEach((e) => {
 // Xử lý thắng thua
 function winOfLose(wins) {
     var winCoin = 0;
+
     for (var i = 0; i < wins.length; i++) {
-        for (var j = 0; j < figures.length; j++) {
-            if (wins[i].index == figures[j].index) {
-                winCoin += wins[i].coin * 2;
-            }
-        }
+        var index = wins[i].index;
+        winCoin += figures[index].coin * 2;
     }
+
+    // reset cược
     for (var j = 0; j < figures.length; j++) {
         figures[j].coin = 0;
     }
+
     user.coin += winCoin;
     updateData();
+
     if (winCoin > 0)
         alert("Bạn thắng " + winCoin + " đồng");
 }
