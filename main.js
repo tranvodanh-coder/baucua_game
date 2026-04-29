@@ -100,7 +100,7 @@ if (btnStart) {
                 dices[1].querySelector('img').src = wins[1].image;
                 dices[2].querySelector('img').src = wins[2].image;
             }
-        }, 100);
+        }, 300);
     };
 }
 // Đặt tiền
@@ -152,9 +152,8 @@ function winOfLose(wins) {
 window.resetGame = function () {
     user.coin = 10;
 
-    for (var i = 0; i < figures.length; i++) {
+    for (var i = 0; i < figures.length; i++)
         figures[i].coin = 0;
-    }
-
+        
     updateData();
 };
