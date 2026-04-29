@@ -1,3 +1,4 @@
+const betInput = document.querySelector('.bet-input');
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 const btnStart = document.querySelector(".btn__start");
@@ -6,53 +7,51 @@ const dices = $$(".figure--small .figure__item");
 var figures = [
     {
         index: 0,
-        image: './img/deer.png',
+        image: './assets/img/deer.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 1,
-        image: './img/calabash.png',
+        image: './assets/img/calabash.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 2,
-        image: './img/chicken.png',
+        image: './assets/img/chicken.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 3,
-        image: './img/fish.png',
+        image: './assets/img/fish.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 4,
-        image: './img/crab.png',
+        image: './assets/img/crab.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 5,
-        image: './img/shrimp.png',
+        image: './assets/img/shrimp.png',
         percent: 16.6666,
         coin: 0,
     },
 ];
 // Khởi tạo trò chơi
 var user = {
-    avatar: './img/user.png',
+    avatar: './assets/img/user.png',
     coin: 10,
     betTable: 2
 }
 function updateData() {
     var headerAvatar = document.querySelector('.header__avatar img');
-    var headerBet = $('.header__bet');
     var headerMoney = document.querySelector('.money-text');
     headerAvatar.src = user.avatar;
-    headerBet.innerHTML = 'Bàn cược: ' + user.betTable + ' đ';
     headerMoney.innerHTML = 'Tiền: ' + user.coin + ' đ';
     dicesItem.forEach((e, index) => {
         var img = e.querySelector('.figure__item--group img');
@@ -107,9 +106,10 @@ if (btnStart) {
 // Đặt tiền
 dicesItem.forEach((item) => {
     item.onclick = () => {
-        if (user.coin >= user.betTable) {
-            user.coin -= user.betTable;
-            figures[item.dataset.id].coin += user.betTable;
+        var bet = Number(betInput.value) || 0 ;
+        if (user.coin >= bet && bet > 0) {
+            user.coin -= bet;
+            figures[item.dataset.id].coin += bet;
             updateData();
         }
     }
@@ -117,10 +117,19 @@ dicesItem.forEach((item) => {
 // Xử lý thắng thua
 function winOfLose(wins) {
     var winCoin = 0;
+    
+    // đếm số lần xuất hiện
+    var count = [0, 0, 0, 0, 0, 0];
 
     for (var i = 0; i < wins.length; i++) {
-        var index = wins[i].index;
-        winCoin += figures[index].coin * 2;
+        count[wins[i].index]++;
+    }
+
+    // tính tiền
+    for (var i = 0; i < figures.length; i++) {
+        if (count[i] > 0) {
+            winCoin += figures[i].coin * (count[i] + 1);
+        }
     }
 
     // reset cược
