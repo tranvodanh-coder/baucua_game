@@ -6,44 +6,44 @@ const dices = $$(".figure--small .figure__item");
 var figures = [
     {
         index: 0,
-        image: './assets/img/deer.png',
+        image: './img/deer.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 1,
-        image: './assets/img/calabash.png',
+        image: './img/calabash.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 2,
-        image: './assets/img/chicken.png',
+        image: './img/chicken.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 3,
-        image: './assets/img/fish.png',
+        image: './img/fish.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 4,
-        image: './assets/img/crab.png',
+        image: './img/crab.png',
         percent: 16.6666,
         coin: 0,
     },
     {
         index: 5,
-        image: './assets/img/shrimp.png',
+        image: './img/shrimp.png',
         percent: 16.6666,
         coin: 0,
     },
 ];
 // Khởi tạo trò chơi
 var user = {
-    avatar: './assets/img/user.png',
+    avatar: './img/user.png',
     coin: 10,
     betTable: 2
 }
