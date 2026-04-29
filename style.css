@@ -9,7 +9,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+img {
+    display: block;
+}
 body {
     background: center / cover no-repeat url("./assets/img/background.jpg");
 }
@@ -45,8 +47,13 @@ main {
 
 .header__bet,
 .header__money {
-    font-size: 16px;
-    padding: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.header__money img {
+    height: 20px;
 }
 
 /* ============================== Figure ============================== */
@@ -60,6 +67,7 @@ main {
 .figure__item {
     width: calc(100% /3);
     padding: 8px;
+    cursor: pointer;
 }
 
 .figure__item--group {
